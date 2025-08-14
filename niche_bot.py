@@ -2,7 +2,7 @@ import praw
 import config
 import schedule
 import requests
-
+import time
 DISCHORD_WEBHOOK_URL = config.DISCHORD_WEBHOOK_URL
 def bot_login():
     print ("Logging in...")
