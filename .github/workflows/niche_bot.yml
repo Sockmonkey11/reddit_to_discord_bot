@@ -3,6 +3,8 @@ name: Run Reddit → Discord Bot Daily
 on:
   schedule:
     - cron: '35 14 * * *'  # Runs every day at 14:35 UTC (adjust to your local time)
+on:
+  workflow_dispatch:  # This allows manual runs
 
 jobs:
   run-bot:
