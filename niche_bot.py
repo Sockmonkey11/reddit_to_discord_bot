@@ -1,7 +1,5 @@
 import praw
-import schedule
 import requests
-import time
 import os 
 try:
     import config
