@@ -1,15 +1,27 @@
 import praw
-import config
 import schedule
 import requests
 import time
-DISCHORD_WEBHOOK_URL = config.DISCHORD_WEBHOOK_URL
+import os 
+try:
+    import config
+except ImportError:
+    config = None
+
+username = os.getenv("REDDIT_USERNAME") or (config.username if config else None)
+password = os.getenv("REDDIT_PASSWORD") or (config.password if config else None)
+client_id = os.getenv("REDDIT_CLIENT_ID") or (config.client_id if config else None)
+client_secret = os.getenv("REDDIT_CLIENT_SECRET") or (config.client_secret if config else None)
+webhook = os.getenv("DISCORD_WEBHOOK") or (config.DISCHORD_WEBHOOK_URL if config else None)
+
+DISCHORD_WEBHOOK_URL = webhook
+
 def bot_login():
     print ("Logging in...")
-    r = praw.Reddit(username = config.username,
-                password = config.password,
-                client_id = config.client_id,
-                client_secret = config.client_secret,
+    r = praw.Reddit(username = username,
+                password = password,
+                client_id = client_id,
+                client_secret = client_secret,
                 user_agent = "Cat_test by u/Cat_test v1.0")
     print ("Logged in!")
     return r
@@ -29,6 +41,11 @@ def run_bot(r):
 
 r = bot_login()
 run_bot(r)
+
+
+
+
+
 # schedule.every().day.at("10:35").do(run_bot, r)
 
 # while True:
